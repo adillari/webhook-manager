@@ -52,10 +52,13 @@ post "/" do
   halt(200) unless branch == "main" || branch == "master"
   halt(400) unless owner == 33879257
 
+  puts "-----------------"
+  puts owner.class
+
   # Run deploy script
   case repo
   when "webhook-manager"
-    Thread.new { system("sleep 5 && git stash && git pull -f") }
+    Thread.new { system("echo test && sleep 5 && git stash && git pull -f") }
     status(202)
   when "maz.dev"
     status(202)
