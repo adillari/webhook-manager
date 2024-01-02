@@ -53,10 +53,7 @@ post "/" do
   halt(400) unless owner == "mazUwU"
 
   # TODO: Remove this
-  puts body
-  owner_id = body["repository"]["owner"]["id"]
-  puts owner_id
-  puts owner_id.class
+  pp json_payload
 
   # Run deploy script
   case repo
