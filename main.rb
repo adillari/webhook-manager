@@ -49,7 +49,7 @@ post "/" do
   owner = json_payload["repository"]["owner"]["login"]
 
   # Check if the request is for a repo I own, on it's main branch
-  halt(202) unless branch == "main" || branch == "master"
+  halt(200) unless branch == "main" || branch == "master"
   halt(400) unless owner == "mazUwU"
 
   # Run deploy script
@@ -61,7 +61,7 @@ post "/" do
     status(202)
     system("./deploy_maz_dev.sh")
   else
-    status(406)
+    status(400)
   end
 end
 
