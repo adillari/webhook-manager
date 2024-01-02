@@ -67,7 +67,7 @@ post "/" do
     status(202)
     system("./deploy_maz_dev.sh")
   else
-    status(400)
+    status(406)
   end
 end
 
