@@ -5,6 +5,7 @@ require "sinatra"
 require "sinatra/reloader"
 require "json"
 require "openssl"
+require "debug"
 
 set :port, 7000
 GITHUB_WEBHOOK_SECRET = ENV["GITHUB_WEBHOOK_SECRET"]
@@ -54,6 +55,7 @@ post "/" do
 
   # TODO: Remove this
   pp json_payload
+  binding.break
 
   # Run deploy script
   case repo
