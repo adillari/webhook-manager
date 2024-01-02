@@ -55,7 +55,7 @@ post "/" do
   case repo
   when "webhook-manager"
     status(202)
-    Thread.new { system("pwd && . deploy/whman.sh") }
+    Thread.new { system(". deploy/whman.sh") }
   when "maz.dev"
     status(202)
     system(". deploy/maz.sh")
