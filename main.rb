@@ -2,7 +2,6 @@
 
 require "bundler/setup"
 require "sinatra"
-require "sinatra/reloader"
 require "json"
 require "openssl"
 
@@ -55,11 +54,11 @@ post "/" do
   # Run deploy script
   case repo
   when "webhook-manager"
-    Thread.new { system("echo test && sleep 5 && git stash && git pull -f") }
     status(202)
+    Thread.new { system("source deploy/whman.sh") }
   when "maz.dev"
     status(202)
-    system("./deploy_maz_dev.sh")
+    system("source deploy/maz.sh")
   else
     status(400)
   end
