@@ -1,9 +1,8 @@
 #!/bin/sh
 
-sleep 5
-pkill -f webhook-manager
+sleep 10
+kill -9 $(lsof -i :7000 -t)
 git stash
 git pull -f
 bundle install
-sleep 5
 ruby main.rb
