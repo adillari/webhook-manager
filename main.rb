@@ -46,13 +46,11 @@ post "/" do
   # Pull out what I need from the json
   branch = json_payload["ref"].split("/").last
   repo = json_payload["repository"]["name"]
-  owner = json_payload["repository"]["owner"]["login"]
+  owner = json_payload["repository"]["owner"]["id"]
 
   # Check if the request is for a repo I own, on it's main branch
   halt(200) unless branch == "main" || branch == "master"
   halt(400) unless owner == 33879257
-
-  puts owner.class
 
   # Run deploy script
   case repo
