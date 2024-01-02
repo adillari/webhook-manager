@@ -50,7 +50,7 @@ post "/" do
 
   # Check if the request is for a repo I own, on it's main branch
   halt(200) unless branch == "main" || branch == "master"
-  halt(400) unless owner == "mazUwU"
+  halt(400) unless owner == 33879257
 
   # Run deploy script
   case repo
