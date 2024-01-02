@@ -5,7 +5,6 @@ require "sinatra"
 require "sinatra/reloader"
 require "json"
 require "openssl"
-require "debug"
 
 set :port, 7000
 GITHUB_WEBHOOK_SECRET = ENV["GITHUB_WEBHOOK_SECRET"]
@@ -52,10 +51,6 @@ post "/" do
   # Check if the request is for a repo I own, on it's main branch
   halt(202) unless branch == "main" || branch == "master"
   halt(400) unless owner == "mazUwU"
-
-  # TODO: Remove this
-  pp json_payload
-  binding.break
 
   # Run deploy script
   case repo
