@@ -34,18 +34,19 @@ post "/" do
   signature = request.env["HTTP_X_HUB_SIGNATURE"]
   halt(400) unless signature
 
-  payload = JSON.parse(request.body.read)
+  raw_payload = request.body.read
+  json_payload = JSON.parse(raw_payload)
 
   # Return if signature is bad
-  verify_signature(payload, signature)
+  verify_signature(raw_payload, signature)
 
   # Check if the request is a push event
   halt(400) unless request.env["HTTP_X_GITHUB_EVENT"] == "push"
 
-  # Pull out what I need from the payload
-  branch = payload["ref"].split("/").last
-  repo = payload["repository"]["name"]
-  owner = payload["repository"]["owner"]["login"]
+  # Pull out what I need from the json
+  branch = json_payload["ref"].split("/").last
+  repo = json_payload["repository"]["name"]
+  owner = json_payload["repository"]["owner"]["login"]
 
   # Check if the request is for a repo I own, on it's main branch
   halt(202) unless branch == "main" || branch == "master"
