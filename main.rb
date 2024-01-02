@@ -55,7 +55,7 @@ post "/" do
   # Run deploy script
   case repo
   when "webhook-manager"
-    Thread.new { system("sleep 5 && git pull -f") }
+    Thread.new { system("sleep 5 && git stash && git pull -f") }
     status(202)
   when "maz.dev"
     status(202)
