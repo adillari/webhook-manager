@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Deploying maz.dev"
+
 pkill -f maz.dev
 cd ../maz.dev
 git stash
