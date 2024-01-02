@@ -52,7 +52,6 @@ post "/" do
   halt(200) unless branch == "main" || branch == "master"
   halt(400) unless owner == 33879257
 
-  puts "-----------------"
   puts owner.class
 
   # Run deploy script
