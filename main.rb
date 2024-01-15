@@ -8,26 +8,6 @@ require "openssl"
 set :port, 7000
 GITHUB_WEBHOOK_SECRET = ENV["GITHUB_WEBHOOK_SECRET"]
 
-get "/" do
-  html_response = <<~HTML
-    <html>
-      <head>
-        <title>Webhook Manager</title>
-        <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
-      </head>
-      <body>
-        <h1>Oh hi!</h1>
-        <h4>
-          This project is responsible for automatically updating my live
-          projects as I work on them, and doesn't have a user interface.
-        </h4>
-      </body>
-    </html>
-  HTML
-
-  html_response
-end
-
 post "/" do
   # Check if the request is signed by Github
   signature = request.env["HTTP_X_HUB_SIGNATURE"]
@@ -62,6 +42,26 @@ post "/" do
   else
     status(400)
   end
+end
+
+get "/" do
+  html_response = <<~HTML
+    <html>
+      <head>
+        <title>Webhook Manager</title>
+        <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+      </head>
+      <body>
+        <h1>Oh hi</h1>
+        <h4>
+          This project is responsible for automatically updating my live
+          projects as I work on them, and doesn't have a user interface.
+        </h4>
+      </body>
+    </html>
+  HTML
+
+  html_response
 end
 
 def verify_signature(payload, signature)
